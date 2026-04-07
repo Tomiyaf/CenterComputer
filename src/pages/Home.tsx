@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import type { Product, Category } from "../types"
-import { getProducts, initializeData } from "../lib/storage"
+import { getProducts, getCategories, initializeData } from "../lib/storage"
 import ProductCard from "../components/ProductCard"
 import { SlidersHorizontal } from "lucide-react"
 import Navbar from "../components/Navbar"
@@ -23,6 +23,7 @@ export default function Home() {
   useEffect(() => {
     initializeData()
     setProducts(getProducts())
+    setCategories(getCategories())
   }, [])
 
   const filteredAndSortedProducts = products
