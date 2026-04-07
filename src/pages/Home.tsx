@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { Product } from '../types';
 import { getProducts, initializeData } from '../lib/storage';
 import ProductCard from '../components/ProductCard';
