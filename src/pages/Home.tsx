@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react"
-import type { Product } from "../types"
-import { getProducts, initializeData } from "../lib/storage"
+import type { Product, Category } from "../types"
+import { getProducts, getCategories, initializeData } from "../lib/storage"
 import ProductCard from "../components/ProductCard"
 import { SlidersHorizontal } from "lucide-react"
 import Navbar from "../components/Navbar"
+import FilterSidebar from "../components/FilterSidebar"
 
 type SortOption = "newest" | "price-asc" | "price-desc"
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
 
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -21,6 +23,7 @@ export default function Home() {
   useEffect(() => {
     initializeData()
     setProducts(getProducts())
+    setCategories(getCategories())
   }, [])
 
   const filteredAndSortedProducts = products
@@ -58,6 +61,21 @@ export default function Home() {
               <SlidersHorizontal size={16} />
               Filter
             </button>
+          </div>
+
+          {/* Sidebar */}
+          <div
+            className={`lg:w-64 flex-shrink-0 ${isMobileFilterOpen ? "block" : "hidden lg:block"}`}
+          >
+            <div className="sticky top-24">
+              <FilterSidebar
+                categories={categories}
+                selectedCategory={selectedCategory}
+                selectedSubcategory={selectedSubcategory}
+                onSelectCategory={setSelectedCategory}
+                onSelectSubcategory={setSelectedSubcategory}
+              />
+            </div>
           </div>
 
           {/* Main Content */}
