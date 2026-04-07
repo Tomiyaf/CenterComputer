@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import type { Product } from "../types"
-import { formatRupiah } from "../utils/FormatRupiah"
+import { formatRupiah } from "../utils/formatRupiah"
 
 interface ProductCardProps {
   product: Product

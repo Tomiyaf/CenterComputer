@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { formatRupiah } from "./FormatRupiah"
+import { formatRupiah } from "./formatRupiah"
 
 const normalize = (value: string) => value.replace(/\s/g, "")
 
