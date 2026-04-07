@@ -1,14 +1,5 @@
 import type { Product, FilterParams } from "../types"
 
-export const formatRupiah = (amount: number): string => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount)
-}
-
 export function filterAndSortProducts(
   products: Product[],
   { searchQuery, selectedCategory, selectedSubcategory, sortBy }: FilterParams,
