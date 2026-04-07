@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type { Product, Category } from "../types"
 import { getProducts, getCategories, initializeData } from "../lib/storage"
+import { filterAndSortProducts } from "../lib/utils"
 import ProductCard from "../components/ProductCard"
 import { SlidersHorizontal } from "lucide-react"
 import Navbar from "../components/Navbar"
@@ -26,24 +27,12 @@ export default function Home() {
     setCategories(getCategories())
   }, [])
 
-  const filteredAndSortedProducts = products
-    .filter((p) => {
-      const matchesSearch = p.name
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-      const matchesCategory = selectedCategory
-        ? p.category === selectedCategory
-        : true
-      const matchesSubcategory = selectedSubcategory
-        ? p.subcategory === selectedSubcategory
-        : true
-      return matchesSearch && matchesCategory && matchesSubcategory
-    })
-    .sort((a, b) => {
-      if (sortBy === "price-asc") return a.price - b.price
-      if (sortBy === "price-desc") return b.price - a.price
-      return b.createdAt - a.createdAt // newest
-    })
+  const filteredAndSortedProducts = filterAndSortProducts(products, {
+    searchQuery,
+    selectedCategory,
+    selectedSubcategory,
+    sortBy,
+  })
 
   return (
     <div className="min-h-screen bg-gray-50">
