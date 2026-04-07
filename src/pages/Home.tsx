@@ -1,46 +1,53 @@
-import { useState, useEffect } from 'react';
-import type { Product } from '../types';
-import { getProducts, initializeData } from '../lib/storage';
-import ProductCard from '../components/ProductCard';
-import { SlidersHorizontal } from 'lucide-react';
-import Navbar from '../components/Navbar';
+import { useState, useEffect } from "react"
+import type { Product } from "../types"
+import { getProducts, initializeData } from "../lib/storage"
+import ProductCard from "../components/ProductCard"
+import { SlidersHorizontal } from "lucide-react"
+import Navbar from "../components/Navbar"
 
-type SortOption = 'newest' | 'price-asc' | 'price-desc';
+type SortOption = "newest" | "price-asc" | "price-desc"
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-  
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<SortOption>('newest');
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+  const [products, setProducts] = useState<Product[]>([])
+
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(
+    null,
+  )
+  const [sortBy, setSortBy] = useState<SortOption>("newest")
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
 
   useEffect(() => {
-    initializeData();
-    setProducts(getProducts());
-  }, []);
+    initializeData()
+    setProducts(getProducts())
+  }, [])
 
   const filteredAndSortedProducts = products
-    .filter(p => {
-      const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory ? p.category === selectedCategory : true;
-      const matchesSubcategory = selectedSubcategory ? p.subcategory === selectedSubcategory : true;
-      return matchesSearch && matchesCategory && matchesSubcategory;
+    .filter((p) => {
+      const matchesSearch = p.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+      const matchesCategory = selectedCategory
+        ? p.category === selectedCategory
+        : true
+      const matchesSubcategory = selectedSubcategory
+        ? p.subcategory === selectedSubcategory
+        : true
+      return matchesSearch && matchesCategory && matchesSubcategory
     })
     .sort((a, b) => {
-      if (sortBy === 'price-asc') return a.price - b.price;
-      if (sortBy === 'price-desc') return b.price - a.price;
-      return b.createdAt - a.createdAt; // newest
-    });
+      if (sortBy === "price-asc") return a.price - b.price
+      if (sortBy === "price-desc") return b.price - a.price
+      return b.createdAt - a.createdAt // newest
+    })
 
   return (
     <div className="min-h-screen bg-gray-50">
-        <Navbar onSearch={setSearchQuery} />
-      
+      <Navbar onSearch={setSearchQuery} />
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          
           {/* Mobile Filter Toggle */}
           <div className="lg:hidden flex justify-between items-center mb-4">
             <h1 className="text-2xl font-bold text-gray-900">Produk Kami</h1>
@@ -57,12 +64,18 @@ export default function Home() {
           <div className="flex-1">
             <div className="hidden lg:flex justify-between items-center mb-6">
               <h1 className="text-2xl font-bold text-gray-900">
-                {selectedCategory ? selectedCategory : 'Semua Produk'}
-                {selectedSubcategory && <span className="text-gray-500 font-normal text-lg ml-2">/ {selectedSubcategory}</span>}
+                {selectedCategory ? selectedCategory : "Semua Produk"}
+                {selectedSubcategory && (
+                  <span className="text-gray-500 font-normal text-lg ml-2">
+                    / {selectedSubcategory}
+                  </span>
+                )}
               </h1>
-              
+
               <div className="flex items-center gap-3">
-                <label htmlFor="sort" className="text-sm text-gray-600">Urutkan:</label>
+                <label htmlFor="sort" className="text-sm text-gray-600">
+                  Urutkan:
+                </label>
                 <select
                   id="sort"
                   value={sortBy}
@@ -92,18 +105,20 @@ export default function Home() {
             {/* Product Grid */}
             {filteredAndSortedProducts.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                {filteredAndSortedProducts.map(product => (
+                {filteredAndSortedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             ) : (
               <div className="text-center py-20 bg-white rounded-xl border border-gray-200">
-                <p className="text-gray-500 text-lg">Tidak ada produk yang ditemukan.</p>
-                <button 
+                <p className="text-gray-500 text-lg">
+                  Tidak ada produk yang ditemukan.
+                </p>
+                <button
                   onClick={() => {
-                    setSearchQuery('');
-                    setSelectedCategory(null);
-                    setSelectedSubcategory(null);
+                    setSearchQuery("")
+                    setSelectedCategory(null)
+                    setSelectedSubcategory(null)
                   }}
                   className="mt-4 text-blue-600 hover:text-blue-800 font-medium"
                 >
@@ -115,5 +130,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  );
+  )
 }

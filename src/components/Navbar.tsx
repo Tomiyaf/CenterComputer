@@ -1,33 +1,33 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShoppingCart, User, LogOut, Settings } from 'lucide-react';
-import { isLoggedIn, logout } from '../lib/storage';
-import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from "react-router-dom"
+import { Search, ShoppingCart, User, LogOut, Settings } from "lucide-react"
+import { isLoggedIn, logout } from "../lib/storage"
+import React, { useState, useEffect } from "react"
 
 interface NavbarProps {
-  onSearch?: (query: string) => void;
+  onSearch?: (query: string) => void
 }
 
 export default function Navbar({ onSearch }: NavbarProps) {
-  const navigate = useNavigate();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate()
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
-    setIsAdmin(isLoggedIn());
-  }, []);
+    setIsAdmin(isLoggedIn())
+  }, [])
 
   const handleLogout = () => {
-    logout();
-    setIsAdmin(false);
-    navigate('/');
-  };
+    logout()
+    setIsAdmin(false)
+    navigate("/")
+  }
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (onSearch) {
-      onSearch(searchQuery);
+      onSearch(searchQuery)
     }
-  };
+  }
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
@@ -38,7 +38,9 @@ export default function Navbar({ onSearch }: NavbarProps) {
             <div className="bg-blue-600 text-white p-2 rounded-lg">
               <ShoppingCart size={24} />
             </div>
-            <span className="text-xl font-bold text-gray-900 hidden sm:block">CenterComputer</span>
+            <span className="text-xl font-bold text-gray-900 hidden sm:block">
+              CenterComputer
+            </span>
           </Link>
 
           {/* Search Bar */}
@@ -66,14 +68,18 @@ export default function Navbar({ onSearch }: NavbarProps) {
                   className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
                 >
                   <Settings size={20} />
-                  <span className="hidden sm:block text-sm font-medium">Dashboard</span>
+                  <span className="hidden sm:block text-sm font-medium">
+                    Dashboard
+                  </span>
                 </Link>
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-2 text-gray-600 hover:text-red-600 transition-colors"
                 >
                   <LogOut size={20} />
-                  <span className="hidden sm:block text-sm font-medium">Logout</span>
+                  <span className="hidden sm:block text-sm font-medium">
+                    Logout
+                  </span>
                 </button>
               </div>
             ) : (
@@ -82,12 +88,14 @@ export default function Navbar({ onSearch }: NavbarProps) {
                 className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
               >
                 <User size={20} />
-                <span className="hidden sm:block text-sm font-medium">Login Admin</span>
+                <span className="hidden sm:block text-sm font-medium">
+                  Login Admin
+                </span>
               </Link>
             )}
           </div>
         </div>
       </div>
     </nav>
-  );
+  )
 }
