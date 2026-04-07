@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import type { Product, Category } from "../types"
 import { getProducts, getCategories, initializeData } from "../lib/storage"
-import { filterAndSortProducts } from "../lib/utils"
+import { filterAndSortProducts } from "../utils/filterAndSortProduct"
 import ProductCard from "../components/ProductCard"
 import { SlidersHorizontal } from "lucide-react"
 import Navbar from "../components/Navbar"
