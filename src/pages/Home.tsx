@@ -3,6 +3,7 @@ import type { Product } from '../types';
 import { getProducts, initializeData } from '../lib/storage';
 import ProductCard from '../components/ProductCard';
 import { SlidersHorizontal } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 type SortOption = 'newest' | 'price-asc' | 'price-desc';
 
@@ -35,6 +36,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+        <Navbar onSearch={setSearchQuery} />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
