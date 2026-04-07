@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import type { Product, Category } from "../types"
 import { getProducts, getCategories, initializeData } from "../lib/storage"
 import { filterAndSortProducts } from "../utils/filterAndSortProduct"
@@ -26,6 +27,14 @@ export default function Home() {
     setProducts(getProducts())
     setCategories(getCategories())
   }, [])
+
+  const location = useLocation()
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const q = params.get("q") || ""
+    setSearchQuery(q)
+  }, [location.search])
 
   const filteredAndSortedProducts = filterAndSortProducts(products, {
     searchQuery,

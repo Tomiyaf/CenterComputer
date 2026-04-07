@@ -26,6 +26,10 @@ export default function Navbar({ onSearch }: NavbarProps) {
     e.preventDefault()
     if (onSearch) {
       onSearch(searchQuery)
+    } else {
+      // If no onSearch callback provided, navigate to home with query param
+      const q = encodeURIComponent(searchQuery)
+      navigate(`/?q=${q}`)
     }
   }
 
