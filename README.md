@@ -1,3 +1,10 @@
+Center Computer
+
+- Web katalog untuk menampilkan produk toko komputer
+- Tidak menyediakan transaksi online (fokus informasi produk)
+- Membantu user melihat spesifikasi & harga dengan mudah
+- Target: customer & admin toko
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
