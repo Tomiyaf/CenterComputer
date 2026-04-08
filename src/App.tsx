@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Dashboard from "./pages/admin/Dashboard"
 import ProductDetail from "./pages/ProductDetail"
 import ProductForm from "./pages/admin/ProductForm"
+import CategoryManagement from "./pages/admin/CategoryManagement"
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/products/new" element={<ProductForm />} />
         <Route path="/admin/products/edit/:id" element={<ProductForm />} />
+        <Route path="/admin/categories" element={<CategoryManagement />} />
       </Routes>
     </Router>
   )

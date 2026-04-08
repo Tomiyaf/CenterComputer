@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import AdminLayout from "../../components/AdminLayout"
 import { getProducts, deleteProduct } from "../../lib/storage"
