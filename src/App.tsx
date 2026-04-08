@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Dashboard from "./pages/admin/Dashboard"
 import ProductDetail from "./pages/ProductDetail"
+import ProductForm from "./pages/admin/ProductForm"
 
 export default function App() {
   return (
@@ -14,6 +15,8 @@ export default function App() {
 
         {/* Admin Routes */}
         <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin/products/new" element={<ProductForm />} />
+        <Route path="/admin/products/edit/:id" element={<ProductForm />} />
       </Routes>
     </Router>
   )
